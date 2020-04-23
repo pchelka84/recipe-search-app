@@ -15,13 +15,15 @@ const state = {};
 const controlSearch = async () => {
   // 1. Get the query from the view
   const query = searchView.getInput();
-  console.log(query);
+  // console.log(query);
 
   if (query) {
     // 2. New search object and add it to state
     state.search = new Search(query);
 
     // 3. Prepare UI for results
+    searchView.clearInput();
+    searchView.clearRusults();
 
     // 4. Search for recepies
     await state.search.getResults();

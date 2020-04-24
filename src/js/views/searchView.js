@@ -8,6 +8,7 @@ export const clearInput = () => {
 
 export const clearRusults = () => {
   elements.searchResultList.innerHTML = "";
+  elements.searchResPages.innerHTML = "";
 };
 
 // 'Pasta with tomato and spinach'

@@ -37,8 +37,8 @@ export default class Recipe {
     const unitsLong = [
       "tablespoons",
       "tablespoon",
-      "ounce",
       "ounces",
+      "ounce",
       "teaspoons",
       "teaspoon",
       "cups",
@@ -58,11 +58,11 @@ export default class Recipe {
       // 1. Uniform units
       let ingredient = el.toLowerCase();
       unitsLong.forEach((unit, i) => {
-        ingredient = ingredient.replace(unit, unitShort[i]);
+        ingredient = ingredient.replace(unit, unitsShort[i]);
       });
 
       // 2. Remove parentheses
-      ingredient = ingredient.replace(/ *\([^)]*\) */g, "");
+      ingredient = ingredient.replace(/ *\([^)]*\) */g, " ");
 
       // 3. Parse ingredients into count, unit and ingredients
 

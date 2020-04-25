@@ -27,4 +27,8 @@ export default class Recipe {
     const periods = Math.ceil(numIng / 3);
     this.time = periods * 15;
   }
+
+  calcServings() {
+    this.servings = 4;
+  }
 }

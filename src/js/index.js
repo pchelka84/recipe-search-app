@@ -84,4 +84,9 @@ const controlRecipe = async () => {
   }
 };
 
-window.addEventListener("hashchange", controlRecipe);
+// window.addEventListener("hashchange", controlRecipe);
+// window.addEventListener("load", controlRecipe);
+// INSTEAD useful when we have numerous different event types
+["hashchange", "load"].forEach((event) => {
+  window.addEventListener(event, controlRecipe);
+});

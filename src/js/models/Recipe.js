@@ -42,7 +42,7 @@ export default class Recipe {
       "teaspoons",
       "teaspoon",
       "cups",
-      "ponds",
+      "pounds",
     ];
     const unitsShort = [
       "tbsp",
@@ -54,6 +54,7 @@ export default class Recipe {
       "cup",
       "pound",
     ];
+
     const newIngredients = this.ingredients.map((el) => {
       // 1. Uniform units
       let ingredient = el.toLowerCase();
@@ -65,8 +66,44 @@ export default class Recipe {
       ingredient = ingredient.replace(/ *\([^)]*\) */g, " ");
 
       // 3. Parse ingredients into count, unit and ingredients
+      const arrIng = ingredient.split(" ");
+      const unitIndex = arrIng.findIndex((el2) => unitsShort.includes(el2));
 
-      return ingredient;
+      let objIng;
+      if (unitIndex > -1) {
+        // there is a unit
+        // Ex: 4 1/2 cups, arrCount is [4, 1/2] => eval("4+1/2") -> 4.5
+        // Ex: 4 cups, arrCount is [4]
+        const arrCount = arrIng.slice(0, unitIndex);
+        let count;
+        if (arrCount.length === 1) {
+          count = eval(arrIng[0].replace("-", "+"));
+        } else {
+          count = eval(arrIng.slice(0, unitIndex).join("+"));
+        }
+        objIng = {
+          count,
+          unit: arrIng[unitIndex],
+          ingredient: arrIng.slice(unitIndex + 1).join(" "),
+        };
+      } else if (parseInt(arrIng[0], 10)) {
+        // There is no unit, but the 1st element
+        // is a number
+        objIng = {
+          count: parseInt(arrIng[0], 10),
+          unit: "",
+          ingredient: arrIng.slice(1).join(" "), // the entire array except the 1st element  ex: 1 package
+        };
+      } else if (unitIndex === -1) {
+        // There is NO unit and NO number in the 1st position     ex: salt
+        objIng = {
+          count: 1,
+          unit: "",
+          ingredient,
+        };
+      }
+
+      return objIng;
     });
     this.ingredients = newIngredients;
   }

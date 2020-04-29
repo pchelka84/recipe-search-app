@@ -177,6 +177,7 @@ elements.shopping.addEventListener("click", (e) => {
 
 // TESTING
 state.likes = new Likes();
+
 const controlLike = () => {
   if (!state.likes) state.likes = new Likes();
 
@@ -197,7 +198,7 @@ const controlLike = () => {
     // Add like to UI list
     console.log(state.likes);
 
-    // User has liked curretn recipe
+    // User has liked current recipe
   } else {
     // Remove like from the state
     state.likes.deleteLike(currentID);
@@ -208,6 +209,7 @@ const controlLike = () => {
     // Remove like from UI list
     console.log(state.likes);
   }
+  likesView.toggleLikeMenu(state.likes.getNumLikes());
 };
 
 // Handling recipe button clicks

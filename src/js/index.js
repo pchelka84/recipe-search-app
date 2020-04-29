@@ -7,7 +7,6 @@ import * as recipeView from "./views/recipeView";
 import * as listView from "./views/listView";
 import * as likesView from "./views/likesView";
 import { elements, renderLoader, clearLoader } from "./views/base";
-import { toggleLikeBtn } from "./views/likesView";
 
 /** GLOBAL STATE OF THE APP
  * - Search object
@@ -117,8 +116,9 @@ const controlRecipe = async () => {
       // Render recipe
       // console.log(state.recipe);
       clearLoader();
-      recipeView.renderRecipe(state.recipe);
+      recipeView.renderRecipe(state.recipe, state.likes.isLiked(id));
     } catch (err) {
+      console.log(err);
       alert("Error processing recipe.");
     }
   }
@@ -134,6 +134,7 @@ const controlRecipe = async () => {
 /**
  * LIST CONTROLLER
  * */
+
 const controlList = () => {
   // Create a new list IF there is none yet
   if (!state.list) state.list = new List();
@@ -174,6 +175,8 @@ elements.shopping.addEventListener("click", (e) => {
  * LIKE CONTROLLER
  * */
 
+// TESTING
+state.likes = new Likes();
 const controlLike = () => {
   if (!state.likes) state.likes = new Likes();
 

@@ -153,6 +153,17 @@ elements.shopping.addEventListener("click", (e) => {
 
     // Delete from UI
     listView.deleteItem(id);
+
+    // Handle count update
+  } else if (
+    e.target.matches(".shopping__count-value, .shopping__count-value *")
+  ) {
+    const val = parseFloat(e.target.value);
+
+    // DO: message: please, delete the item or eter a positive number
+    if (e.target.value > 0) {
+      state.list.updateCount(id, val);
+    }
   }
 });
 

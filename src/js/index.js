@@ -17,19 +17,12 @@ import { elements, renderLoader, clearLoader } from "./views/base";
 
 const state = {};
 
-// TESTING
-window.state = state;
-
 /**
  * SEARCH CONTROLLER
  **/
 const controlSearch = async () => {
   // 1. Get the query from the view
   const query = searchView.getInput();
-  // console.log(query);
-
-  // TESTING
-  // const query = "pizza";
 
   if (query) {
     // 2. New search object and add it to state
@@ -46,7 +39,6 @@ const controlSearch = async () => {
 
       // 5. Render results on UI
       clearLoader();
-      // console.log(state.search.results);
       searchView.renderResults(state.search.results);
     } catch (err) {
       alert("Something went wrong with the search.");
@@ -60,12 +52,6 @@ elements.searchForm.addEventListener("submit", (e) => {
   controlSearch();
 });
 
-// TESTING
-// window.addEventListener("load", (e) => {
-//   e.preventDefault();
-//   controlSearch();
-// });
-
 elements.searchResPages.addEventListener("click", (e) => {
   const btn = e.target.closest(".btn-inline");
   // console.log(btn);
@@ -73,7 +59,6 @@ elements.searchResPages.addEventListener("click", (e) => {
     const goToPage = parseInt(btn.dataset.goto, 10); // 10 means on base 10 - from 0 tp 9; 2 - binary
     searchView.clearRusults();
     searchView.renderResults(state.search.results, goToPage);
-    // console.log(goToPage);
   }
 });
 
@@ -87,7 +72,6 @@ elements.searchResPages.addEventListener("click", (e) => {
 const controlRecipe = async () => {
   // Get ID from URL
   const id = window.location.hash.replace("#", "");
-  console.log(id);
 
   if (id) {
     // Prepare UI for changes
@@ -100,13 +84,9 @@ const controlRecipe = async () => {
     // Create new recipe object
     state.recipe = new Recipe(id);
 
-    // TESTING
-    // window.r = state.recipe;
-
     try {
       // Get recipe data and parse ingredients
       await state.recipe.getRecipe();
-      // console.log(state.recipe.ingredients);
       state.recipe.parseIngredients();
 
       // Calculate servings and time
@@ -114,7 +94,6 @@ const controlRecipe = async () => {
       state.recipe.calcServings();
 
       // Render recipe
-      // console.log(state.recipe);
       clearLoader();
       recipeView.renderRecipe(state.recipe, state.likes.isLiked(id));
     } catch (err) {
@@ -192,7 +171,6 @@ const controlLike = () => {
 
     // Add like to UI list
     likesView.renderLike(newLike);
-    // console.log(state.likes);
 
     // User has liked current recipe
   } else {
@@ -203,7 +181,6 @@ const controlLike = () => {
     likesView.toggleLikeBtn(false);
 
     // Remove like from UI list
-    // console.log(state.likes);
     likesView.deleteLike(currentID);
   }
   likesView.toggleLikeMenu(state.likes.getNumLikes());
@@ -243,5 +220,3 @@ elements.recipe.addEventListener("click", (e) => {
     controlLike();
   }
 });
-
-window.l = new List();

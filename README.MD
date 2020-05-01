@@ -4,9 +4,9 @@ This project was built as a practice project of an online course [The Complete J
 
 This small app is a simple recipe search app. A user can search recipes that come from an API, scroll results, select a recipe, like/unlike it, change the amount of servings for a recipe, add ingredients to a shopping list and remove and/or change the amount of ingredients. All liked recipes are stored in a browser's local storage.
 
-![Forkify](./dist/img/forkify.jpg)
+![Forkify](dist/img/forkify.jpg)
 
-![Forkify](./dist/img/forkify-bottom.jpg)
+![Forkify](dist/img/forkify-bottom.jpg)
 
 My goal with the project was dive into coding once again after a year-long break... My intention was to refresh and strengthen my knowledge and understanding of how JavaScrpit works, OOP, JS ES6+, AJAX, Webpack.
 
